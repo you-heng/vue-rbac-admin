@@ -1,0 +1,146 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3671006 */
+  src: url('//at.alicdn.com/t/c/font_3671006_k0mz13ww29n.woff2?t=1669989249613') format('woff2'),
+       url('//at.alicdn.com/t/c/font_3671006_k0mz13ww29n.woff?t=1669989249613') format('woff'),
+       url('//at.alicdn.com/t/c/font_3671006_k0mz13ww29n.ttf?t=1669989249613') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow_down_fat:before {
+  content: "\e62d";
+}
+
+.icon-shangchuan:before {
+  content: "\e60d";
+}
+
+.icon-quanbushanchu:before {
+  content: "\e626";
+}
+
+.icon-daochu:before {
+  content: "\e61b";
+}
+
+.icon-xiazai:before {
+  content: "\e606";
+}
+
+.icon-piliangshanchu:before {
+  content: "\e623";
+}
+
+.icon-piliangshanchu1:before {
+  content: "\e809";
+}
+
+.icon-fuwushouquan:before {
+  content: "\e68e";
+}
+
+.icon-addNode:before {
+  content: "\e600";
+}
+
+.icon-bianji:before {
+  content: "\e8ac";
+}
+
+.icon-shanchu:before {
+  content: "\e8b6";
+}
+
+.icon-youjiantou:before {
+  content: "\e62c";
+}
+
+.icon-zuojiantou:before {
+  content: "\e60c";
+}
+
+.icon-shangjiantou:before {
+  content: "\e628";
+}
+
+.icon-xiajiantou:before {
+  content: "\e629";
+}
+
+.icon-shuaxin:before {
+  content: "\ec08";
+}
+
+.icon-menu_kongzhitai:before {
+  content: "\e74f";
+}
+
+.icon-shujuzidian:before {
+  content: "\e666";
+}
+
+.icon-tuandui:before {
+  content: "\e603";
+}
+
+.icon-zhiwei:before {
+  content: "\e7bd";
+}
+
+.icon-rizhi1:before {
+  content: "\e68d";
+}
+
+.icon-guanliyuan:before {
+  content: "\e62a";
+}
+
+.icon-jiaose:before {
+  content: "\e614";
+}
+
+.icon-unlock:before {
+  content: "\e73a";
+}
+
+.icon-shezhi:before {
+  content: "\e8b7";
+}
+
+.icon-quanxianpeizhi:before {
+  content: "\e62b";
+}
+
+.icon-shouqi:before {
+  content: "\e7d3";
+}
+
+.icon-zhankai:before {
+  content: "\e7d4";
+}
+
+.icon-xitong:before {
+  content: "\e610";
+}
+
+.icon-lock:before {
+  content: "\e676";
+}
+
+.icon-fullscreen-expand:before {
+  content: "\e675";
+}
+
+.icon-Power:before {
+  content: "\e6f1";
+}
+
+.icon-peizhi:before {
+  content: "\e617";
+}

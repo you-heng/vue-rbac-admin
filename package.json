@@ -1,0 +1,26 @@
+{
+  "name": "rbac",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@layui/layer-vue": "^1.4.3",
+    "@layui/layui-vue": "^1.6.2",
+    "axios": "^1.1.2",
+    "element-plus": "^2.2.17",
+    "js-file-download": "^0.4.12",
+    "pinia": "^2.0.22",
+    "sass": "^1.55.0",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.0",
+    "vite": "^3.1.0"
+  }
+}

@@ -1,0 +1,177 @@
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  font-size: 62.5%;
+}
+
+// main内容部分样式
+.main-home{
+  background-color: #fff !important;
+  height: calc(100% - 4rem);
+  width: calc(100% - 4rem);
+  padding: 2rem;
+}
+.mian-right{
+  height: 100%;
+  background-color: #fff;
+}
+
+//登录样式
+.login-list {
+  width: 100%;
+  height: 100%;
+  background: url("../images/bg5.jpg") no-repeat center center;
+  background-size: cover;
+
+  .login-list-h1 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #f2f2f2;
+  }
+
+  .login-list-div {
+    width: 600px;
+    height: 300px;
+    background-color: #010101;
+    opacity: 0.7;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    border-radius: 8px;
+    padding: 3rem 1rem;
+    text-align: center;
+
+    .login-list-form {
+      padding: 1rem 5rem;
+
+      .login-list-form-code {
+        display: flex;
+        flex-direction: row;
+
+        .login-list-form-img {
+          width: 145px;
+          height: 35px;
+          margin-right: 1rem;
+          cursor: pointer;
+        }
+
+        .el-input {
+          width: 60%;
+          margin-right: 2%;
+        }
+      }
+    }
+  }
+}
+
+// layout
+.common-layout {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  .icon{
+    margin-right: 0.8rem;
+  }
+
+  .el-menu {
+    border-right: 0;
+  }
+
+  .el-container {
+    height: 100%;
+    .layout-main{
+      background-color: #f5f5f5;
+    }
+  }
+
+  .layout-head {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+
+    .head-list {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .head-list-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        i {
+          margin-left: 1.5rem;
+        }
+      }
+
+      .head-list-span {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        margin-left: 1rem;
+        .head-list-img{
+          width: 3rem;
+          border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    .iconfont {
+      width: 2rem;
+      height: 2rem;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  }
+
+  .layout-side {
+    width: 250px;
+    background-color: #545c64;
+  }
+
+  .layout-side-collapse {
+    width: calc(
+      var(--el-menu-icon-width) + var(--el-menu-base-level-padding) * 2
+    );
+    background-color: #545c64;
+  }
+
+  .el-menu-vertical-demo {
+    transition: width 0.3s ease;
+  }
+}
+
+// 数据表格操作栏
+.from-top{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .from-list{
+      display: flex;
+      flex-direction: row;
+      .from-input{
+          display: flex;
+          flex-direction: row;
+          margin-right: 1rem;
+          .from-input-val{
+              margin: 0 1rem;
+              width: 25rem;
+          }
+          .from-select{
+            width: 12rem;
+          }
+      }
+  }
+}
+.from-pagination{
+  margin-top: 1rem;
+}
