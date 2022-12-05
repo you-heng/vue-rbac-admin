@@ -5,6 +5,7 @@ import { resolve } from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  base: '/rbac',
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -13,7 +14,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://rbac.com/",
+        target: "http://rbac.anmixiu.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

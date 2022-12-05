@@ -45,7 +45,7 @@ const loginStore = defineStore('loginStore', {
                 url: 'console/index/captcha',
                 params: {}
             }).then((res) => {
-                let data = JSON.parse(res)
+                let data = JSON.parse(res.data)
                 this.code = data
             })
         },
