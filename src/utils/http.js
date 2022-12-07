@@ -11,7 +11,7 @@ const http = axios.create({
 const code = [
     401, // 没有权限
     402, // token过期
-    403, // token失效  
+    403, // token失效
 ]
 
 // 请求前

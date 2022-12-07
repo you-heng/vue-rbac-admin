@@ -35,6 +35,10 @@ const logout = () => {
       ]
   })
 };
+
+const userinfo = () => {
+  router.push('/userinfo')
+}
 </script>
 
 <template>
@@ -43,10 +47,31 @@ const logout = () => {
     <div class="head-list-right">
       <i class="iconfont icon-shuaxin" @click="refresh"></i>
       <i class="iconfont icon-fullscreen-expand" @click="screen"></i>
-      <span class="head-list-span" @click="logout">
-        <img class="head-list-img" :src="user.avatar" />
-        <span>{{user.username}}</span>
-      </span>
+      <el-tooltip placement="bottom" effect="light">
+        <template #content>
+          <div class="head-list-avatar">
+            <span class="head-list-avatar-span" @click="userinfo">个人信息</span>
+            <span class="head-list-avatar-span" @click="logout">退出系统</span>
+          </div>
+        </template>
+        <span class="head-list-span">
+          <img class="head-list-img" :src="user.avatar.url" />
+          <span>{{user.username}}</span>
+        </span>
+      </el-tooltip>
     </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.head-list-avatar{
+  display: flex;
+  flex-direction: column;
+  .head-list-avatar-span{
+    padding: 0 0.5rem;
+    height: 3.5rem;
+    line-height: 3.5rem;
+    cursor: pointer;
+  }
+}
+</style>

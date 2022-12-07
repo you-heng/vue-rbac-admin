@@ -21,6 +21,14 @@ const routes = [
                 },
                 component: () => import("@/views/console.vue")
             },
+            {
+                path: "/userinfo",
+                name: "userinfo",
+                meta: {
+                    title: "个人信息"
+                },
+                component: () => import("@/views/userinfo.vue")
+            },
             ...system,
             ...config
         ]
@@ -44,7 +52,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory('rbac'),
+    history: createWebHistory(),
     routes
 });
 

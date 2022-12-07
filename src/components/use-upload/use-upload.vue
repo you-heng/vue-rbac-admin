@@ -1,6 +1,6 @@
 <script setup>
-import { setting } from "@/utils"
 import { ref } from "vue";
+import { setting, get_item } from "@/utils"
 import { layer } from "@layui/layer-vue";
 
 const props = defineProps({
@@ -17,6 +17,9 @@ const props = defineProps({
 const emit = defineEmits(['putImg'])
 const fileList = ref([...props.imgList])
 const preview = ref([...props.imgList])
+const token = get_item('token')
+const user = get_item('user')
+const headers = ref({ "token": token, "uniquid": user.uniquid })
 
 const onPreview = (e) => {
     let imgList = []
@@ -43,7 +46,7 @@ const beforeRemove = (e) => {
 const handleAvatarSuccess = (e) => {
     let img = {
         name: e.data.hash,
-        url: setting.upload_list.domain + e.data.key
+        url: e.data.key
     }
     preview.value.push(img)
     emit('putImg', img)
@@ -65,16 +68,17 @@ const beforeAvatarUpload = (e) => {
 
 <template>
     <el-upload
+        name="file"
         class="avatar-uploader"
         list-type="picture-card"
         v-model:file-list="fileList"
         :action="setting.upload"
-        :multiple="true"
         :limit="props.number"
         :on-preview="onPreview"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
         :before-remove="beforeRemove"
+        :headers="headers"
     >
         <i class="iconfont icon-shangchuan icon-upload"></i>
     </el-upload>

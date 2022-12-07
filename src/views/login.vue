@@ -2,13 +2,15 @@
 import useStore from "@/store/modules/login"
 import { storeToRefs } from "pinia"
 import { useRouter } from "vue-router"
-import { verify, setting } from "@/utils"
+import { verify, get_item, setting } from "@/utils"
 
 const router = useRouter();
 const store = useStore()
 const { user, code, fields } = storeToRefs(store)
 
 store.get_code()
+
+const config = get_item('config') || setting;
 
 //获取验证码
 const change_code = () => {
@@ -27,7 +29,7 @@ const submit = () => {
 <template>
     <div class="login-list">
         <div class="login-list-div">
-            <div class="login-list-h1">{{setting.title}}</div>
+            <div class="login-list-h1">{{config.sys_title}}</div>
             <el-form :model="user" label-width="80px" label-position="left" class="login-list-form">
                 <el-form-item label="用户名">
                     <el-input v-model="user.username" placeholder="请输入用户名" />
