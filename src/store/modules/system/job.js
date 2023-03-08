@@ -34,7 +34,8 @@ const jobStore = defineStore("jobStore", {
             sort: 0
         },
         fields: {
-            job_name: '请填写职位名称'
+            job_name: '请填写职位名称',
+            sort: 0
         },
         dialog: {
             dialogVisible: false,
@@ -53,10 +54,10 @@ const jobStore = defineStore("jobStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.jobList = res.data.data
-            this.pagination.page = res.data.page,
-            this.pagination.limit = res.data.limit
-            this.pagination.count = res.data.count
+            this.jobList = res.data
+            this.pagination.page = res.page,
+            this.pagination.limit = res.limit
+            this.pagination.count = res.count
         })
     },
     // 新增

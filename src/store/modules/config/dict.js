@@ -44,7 +44,8 @@ const dictStore = defineStore("dictStore", {
         },
         fields: {
             key: '请填写配置名',
-            val: '请填写配置值'
+            val: '请填写配置值',
+            sort: 0
         },
         dialog: {
             dialogVisible: false,
@@ -63,10 +64,10 @@ const dictStore = defineStore("dictStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.dictList = res.data.data
-            this.pagination.page = res.data.page,
-            this.pagination.limit = res.data.limit
-            this.pagination.count = res.data.count
+            this.dictList = res.data
+            this.pagination.page = res.page,
+            this.pagination.limit = res.limit
+            this.pagination.count = res.count
         })
     },
     // 新增
@@ -171,7 +172,7 @@ const dictStore = defineStore("dictStore", {
         })
     },
     // 清空
-    remove_all(id){
+    remove_all(){
         http({
             method: 'post',
             url: 'console/dict/remove_all',

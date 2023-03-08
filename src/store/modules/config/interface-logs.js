@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
 import { http } from "@/utils"
 
-const logsStore = defineStore("logsStore", {
+const interfaceLogsStore = defineStore("interfaceLogsStore", {
   state: () => {
     return {
         searchValue: '',
@@ -16,17 +16,7 @@ const logsStore = defineStore("logsStore", {
             {
                 id: 2,
                 value: 'username',
-                label: '用户名'
-            },
-            {
-                id: 3,
-                value: 'path',
-                label: '请求地址'
-            },
-            {
-                id: 4,
-                value: 'ip',
-                label: 'ip'
+                label: '操作用户'
             }
         ],
         logsList: [],
@@ -52,10 +42,10 @@ const logsStore = defineStore("logsStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.logsList = res.data.data
-            this.pagination.page = res.data.page,
-            this.pagination.limit = res.data.limit
-            this.pagination.count = res.data.count
+            this.logsList = res.data
+            this.pagination.page = res.page,
+            this.pagination.limit = res.limit
+            this.pagination.count = res.count
         })
     },
     // 删除
@@ -144,4 +134,4 @@ const logsStore = defineStore("logsStore", {
   },
 });
 
-export default logsStore;
+export default interfaceLogsStore;

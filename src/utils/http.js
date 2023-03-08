@@ -1,5 +1,5 @@
 import axios from "axios";
-import { get_item, loading } from "@/utils";
+import { get_item, loading, clear_storage } from "@/utils";
 import { layer } from "@layui/layer-vue";
 
 const http = axios.create({
@@ -41,6 +41,10 @@ http.interceptors.response.use(
         return response.data;
     },
     function (error) {
+        if(error.response.status === 500){
+            // clear_storage()
+            // location.reload()
+        }
         return Promise.reject(error);
     }
 );

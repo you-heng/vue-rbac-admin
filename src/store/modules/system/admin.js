@@ -45,7 +45,8 @@ const adminStore = defineStore("adminStore", {
             username: '请填写用户名',
             role_ids: '请选择至少一个角色',
             team_ids: '请选择用户所属部门',
-            job_id: '请选择一个职位'
+            job_id: '请选择一个职位',
+            sort: 0
         },
         dialog: {
             dialogVisible: false,
@@ -75,10 +76,10 @@ const adminStore = defineStore("adminStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.adminList = res.data.data
-            this.pagination.page = res.data.page,
-            this.pagination.limit = res.data.limit
-            this.pagination.count = res.data.count
+            this.adminList = res.data
+            this.pagination.page = res.page,
+            this.pagination.limit = res.limit
+            this.pagination.count = res.count
         })
     },
     // 根据部门获取列表

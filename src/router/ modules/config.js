@@ -17,13 +17,22 @@ const system = [
           component: () => import("@/views/config/dict.vue"),
         },
         {
-          path: "/config/logs",
-          name: "logs",
+          path: "/config/black-list",
+          name: "black-list",
           meta: {
-            title: "登录日志",
+            title: "ip黑名单",
             icon: "el-icon-menu",
           },
-          component: () => import("@/views/config/logs.vue"),
+          component: () => import("@/views/config/black-list.vue"),
+        },
+        {
+          path: "/config/interface-logs",
+          name: "interface-logs",
+          meta: {
+            title: "日志管理",
+            icon: "el-icon-menu",
+          },
+          component: () => import("@/views/config/interface-logs.vue"),
         }
       ],
     },

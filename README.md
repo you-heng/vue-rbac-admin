@@ -13,3 +13,36 @@
 账号：demo
 
 密码：123456
+
+## nginx配置
+
+在配置中增加以下内容，可以配置多个项目在同一个目录下
+
+```
+location /xx {
+    # root 和 alias只需要一个就可以
+    # 使用root配置
+    root /www/wwwroot/xx.xx.com;        # 域名根目录
+    # 使用alias配置
+    alias /www/wwwroot/xx.xx.com/xx;    # 项目所在目录
+    
+    index index.html;
+    try_files $uri $uri/ /xx/index.html;
+}
+
+location /aa {
+    # root 和 alias只需要一个就可以
+    # 使用root配置
+    root /www/wwwroot/xx.xx.com;        # 域名根目录
+    # 使用alias配置
+    alias /www/wwwroot/xx.xx.com/aa;    # 项目所在目录
+    
+    index index.html;
+    try_files $uri $uri/ /aa/index.html;
+}
+
+location /api {
+    rewrite ^/api?(.*)$ $1 break;
+    proxy_pass http://xx.xx.com/; # 接口
+}
+```

@@ -1,12 +1,12 @@
 <script setup>
-import useStore from "@/store/modules/config/dict"
+import useStore from "@/store/modules/config/black-list"
 import { storeToRefs } from "pinia";
-import TableForm from "./components/dict-from.vue";
+import TableForm from "./components/black-list-from.vue";
 import { layer } from "@layui/layer-vue";
 import { remove_field } from "@/utils"
 
 const store = useStore()
-const { dictList, selectValue, selectList, pagination, searchValue, ids, data } = storeToRefs(store)
+const { blackLists, selectValue, selectList, pagination, searchValue, ids, data } = storeToRefs(store)
 
 store.get_list()
 
@@ -150,11 +150,18 @@ const handleCurrentChange = (e) => {
                     <el-button @click="store.freshen" plain><i class="iconfont icon-shuaxin"></i></el-button>
                 </el-button-group>
             </div>
-            <el-table :data="dictList" @selection-change="handleSelectionChange" border style="width: 100%; height: 86%;">
+            <el-table :data="blackLists" @selection-change="handleSelectionChange" border style="width: 100%; height: 86%;">
                 <el-table-column type="selection" width="55" />
                 <el-table-column prop="id" label="ID" fixed sortable width="80" align="center" />
-                <el-table-column prop="key" label="配置名" align="center" />
-                <el-table-column prop="remark" label="备注" align="center" />
+                <el-table-column prop="ip" label="ip地址" align="center" />
+                <el-table-column prop="is_type" label="类型" align="center" width="100">
+                    <template #default="scope">
+                        <el-tag type="success" v-if="scope.row.is_type == 1">永久拉黑</el-tag>
+                        <el-tag type="warning" v-else>暂时拉黑</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="reason" label="冻结理由" align="center" />
+                <el-table-column prop="time" label="截至时间" align="center" />
                 <el-table-column prop="is_state" label="状态" align="center" width="80">
                     <template #default="scope">
                         <el-popconfirm title="确定修改?" @confirm="state(scope.$index, scope.row)">
@@ -177,7 +184,7 @@ const handleCurrentChange = (e) => {
                         </el-button>
                     </template>
                 </el-table-column>
-            </el-table> 
+            </el-table>
             <el-pagination
                 class="from-pagination"
                 v-model:current-page="pagination.page"
@@ -193,12 +200,3 @@ const handleCurrentChange = (e) => {
         <TableForm />
     </div>
 </template>
-
-<style lang="scss" scoped>
-.demo-tabs > .el-tabs__content {
-  padding: 32px;
-  color: #6b778c;
-  font-size: 32px;
-  font-weight: 600;
-}
-</style>

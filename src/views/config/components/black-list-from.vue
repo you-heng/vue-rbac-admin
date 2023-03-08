@@ -1,6 +1,5 @@
 <script setup>
-import useStore from '@/store/modules/config/dict'
-import upload from "@/components/use-upload/use-upload.vue"
+import useStore from '@/store/modules/config/black-list'
 import { storeToRefs } from 'pinia';
 import { verify } from "@/utils"
 
@@ -30,13 +29,6 @@ const clickButton = () => {
         }
     }
 }
-
-// 更新头像
-const putImg = (img) => {
-    store.$patch({
-        val: img
-    })
-}
 </script>
 
 <template>
@@ -53,42 +45,31 @@ const putImg = (img) => {
             label-width="100px"
             label-position="left"
         >
-            <el-form-item label="配置名">
-                <el-input
-                    v-model="data.key"
-                    :rows="3"
-                    type="textarea"
-                    placeholder="请填写配置名"
-                />
+            <el-form-item label="ip地址">
+                <el-input v-model="data.ip" placeholder="请填写ip地址" />
             </el-form-item>
             <el-form-item label="类型">
                 <el-radio-group v-model="data.is_type">
-                <el-radio :label="1" border>text</el-radio>
-                <el-radio :label="2" border>json</el-radio>
-                <el-radio :label="3" border>图片</el-radio>
+                <el-radio :label="1" border>永久拉黑</el-radio>
+                <el-radio :label="2" border>暂时拉黑</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="配置值" v-if="data.is_type == 1">
-                <el-input
-                    v-if="typeof(data.val) == 'string' || data.val == null || data.val == undefined"
-                    v-model="data.val"
-                    :rows="3"
-                    type="textarea"
-                    placeholder="请填写配置值"
+            <el-form-item label="到期时间" v-if="!data.is_type || data.is_type == 2">
+                <el-date-picker
+                    v-model="data.time"
+                    type="date"
+                    placeholder="请选择到期时间"
+                    style="width: 60%"
+                    value-format="YYYY-MM-DD"
                 />
             </el-form-item>
-            <el-form-item label="配置值" v-else-if="data.is_type == 2">
+            <el-form-item label="冻结理由">
                 <el-input
-                    v-if="typeof(data.val) == 'string' || data.val == null || data.val == undefined"
-                    v-model="data.val"
+                    v-model="data.reason"
                     :rows="3"
                     type="textarea"
-                    placeholder="请填写配置值"
+                    placeholder="请填写冻结理由"
                 />
-            </el-form-item>
-            <el-form-item label="头像" v-else-if="data.is_type == 3">
-                <upload v-if="data.val == null || data.val == undefined" :imgList="[]" :number="1" @putImg="putImg" />
-                <upload v-else :imgList="typeof(data.val) == 'string' ? [] : [data.val]" :number="1" @putImg="putImg" />
             </el-form-item>
             <el-form-item label="排序">
                 <el-input-number v-model="data.sort" />

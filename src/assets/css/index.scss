@@ -46,11 +46,13 @@ body,
 
     .login-list-form {
       padding: 1rem 5rem;
-
+      .el-form-item__content{
+        justify-content: space-between;
+      }
       .login-list-form-code {
         display: flex;
         flex-direction: row;
-
+        
         .login-list-form-img {
           width: 145px;
           height: 35px;
@@ -60,7 +62,6 @@ body,
 
         .el-input {
           width: 60%;
-          margin-right: 2%;
         }
       }
     }

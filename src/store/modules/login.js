@@ -35,6 +35,8 @@ const loginStore = defineStore('loginStore', {
                     setTimeout(() => {
                         router.push('/')
                     }, 500)
+                }else{
+                    this.get_code();
                 }
             })
         },

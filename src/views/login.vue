@@ -19,7 +19,6 @@ const change_code = () => {
 
 //点击登陆
 const submit = () => {
-    console.log()
     if (verify(user.value, fields.value)) {
         store.submit_login(router)
     }
@@ -38,7 +37,7 @@ const submit = () => {
                     <el-input v-model="user.password" type="password" show-password placeholder="请输入密码" />
                 </el-form-item>
                 <el-form-item label="验证码" class="login-list-form-code">
-                    <el-input v-model="user.code" placeholder="请输入验证码" />
+                    <el-input v-model="user.code" @keyup.enter.native="submit" placeholder="请输入验证码" />
                     <img :src="code.captcha" class="login-list-form-img" @click="change_code" />
                 </el-form-item>
                 <el-form-item>

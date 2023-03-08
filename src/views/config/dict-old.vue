@@ -1,20 +1,42 @@
 <script setup>
-import useStore from "@/store/modules/config/logs"
+import useStore from "@/store/modules/config/dict"
 import { storeToRefs } from "pinia";
+import TableForm from "./components/dict-from.vue";
 import { layer } from "@layui/layer-vue";
+import { remove_field } from "@/utils"
 
 const store = useStore()
-const { logsList, selectValue, selectList, pagination, searchValue, ids } = storeToRefs(store)
+const { dictList, selectValue, selectList, pagination, searchValue, ids, data } = storeToRefs(store)
 
 store.get_list()
 
-// 批量导出
-const batch_down = () => {
-    if(ids.value.length === 0){
-        layer.msg('请选择需要导出的项')
-        return false
-    }
-    store.batch_down()
+// 新增
+const create = () => {
+    let from = remove_field(data.value)
+    from.sort = 0
+    store.$patch({
+        dialog: {
+            dialogVisible: true,
+            title: '添加'
+        },
+        data: from
+    })
+}
+
+// 修改
+const update = (index, row) => {
+    store.$patch({
+        dialog: {
+            dialogVisible: true,
+            title: '编辑'
+        },
+        data: {...row}
+    })
+}
+
+//修改状态
+const state = (index, row) => {
+  store.state(index, row.id, row.is_state);
 }
 
 // 删除
@@ -24,10 +46,19 @@ const remove = (index, row) => {
         btn: [
             {text: '取消', callback: function(id){ layer.close(id) }},
             {text: '确定', callback: function(id){
-                store.remove(index, row, id)
+                store.remove(index, row.id, id)
             }}
         ]
     })
+}
+
+// 批量导出
+const batch_down = () => {
+    if(ids.value.length === 0){
+        layer.msg('请选择需要导出的项')
+        return false
+    }
+    store.batch_down()
 }
 
 // 批量删除
@@ -110,7 +141,8 @@ const handleCurrentChange = (e) => {
                         <el-button @click="store.search" type="primary">搜索</el-button>
                     </div>
                 </div>
-                <el-button-group class="ml-5">
+                <el-button-group class="ml-6">
+                    <el-button @click="create" plain type="primary"><i class="iconfont icon-addNode"></i></el-button>
                     <el-button @click="batch_remove" plain type="warning"><i class="iconfont icon-piliangshanchu"></i></el-button>
                     <el-button @click="batch_down" plain type="success"><i class="iconfont icon-xiazai"></i></el-button>
                     <el-button @click="remove_all" plain type="danger"><i class="iconfont icon-quanbushanchu"></i></el-button>
@@ -118,15 +150,29 @@ const handleCurrentChange = (e) => {
                     <el-button @click="store.freshen" plain><i class="iconfont icon-shuaxin"></i></el-button>
                 </el-button-group>
             </div>
-            <el-table :data="logsList" @selection-change="handleSelectionChange" border style="width: 100%; height: 83%;">
+            <el-table :data="dictList" @selection-change="handleSelectionChange" border style="width: 100%; height: 86%;">
                 <el-table-column type="selection" width="55" />
                 <el-table-column prop="id" label="ID" fixed sortable width="80" align="center" />
-                <el-table-column prop="username" label="用户名" align="center" width="150" />
-                <el-table-column prop="path" label="请求地址" align="center" />
-                <el-table-column prop="ip" label="ip" align="center" />
-                <el-table-column prop="create_time" sortable label="创建时间" align="center" width="160"  />
-                <el-table-column label="操作" width="60" fixed="right" align="center">
+                <el-table-column prop="key" label="配置名" align="center" />
+                <el-table-column prop="val" label="配置值" align="center" />
+                <el-table-column prop="remark" label="备注" align="center" />
+                <el-table-column prop="is_state" label="状态" align="center" width="80">
                     <template #default="scope">
+                        <el-popconfirm title="确定修改?" @confirm="state(scope.$index, scope.row)">
+                            <template #reference>
+                                <el-tag type="success" v-if="scope.row.is_state == 1">正常</el-tag>
+                                <el-tag type="warning" v-else>禁用</el-tag>
+                            </template>
+                        </el-popconfirm>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="sort" label="排序" align="center" width="100" />
+                <el-table-column prop="create_time" sortable label="创建时间" align="center" width="160"  />
+                <el-table-column label="操作" width="90" fixed="right" align="center">
+                    <template #default="scope">
+                        <el-button circle size="small" @click="update(scope.$index, scope.row)">
+                            <i class="iconfont icon-bianji"></i>
+                        </el-button>
                         <el-button circle size="small" type="danger" @click="remove(scope.$index, scope.row)">
                             <i class="iconfont icon-shanchu"></i>
                         </el-button>
@@ -145,5 +191,6 @@ const handleCurrentChange = (e) => {
                 @current-change="handleCurrentChange"
             />
         </div>
+        <TableForm />
     </div>
 </template>

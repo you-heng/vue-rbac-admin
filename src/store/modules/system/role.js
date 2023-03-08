@@ -65,10 +65,10 @@ const roleStore = defineStore("roleStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.roleList = res.data.data
-            this.pagination.page = res.data.page,
-            this.pagination.limit = res.data.limit
-            this.pagination.count = res.data.count
+            this.roleList = res.data
+            this.pagination.page = res.page,
+            this.pagination.limit = res.limit
+            this.pagination.count = res.count
         })
     },
     // 获取权限列表

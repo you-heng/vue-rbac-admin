@@ -3,10 +3,13 @@ import useStore from "@/store/modules/layout";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { layer } from "@layui/layer-vue";
+import screenfull from "screenfull"
+import { onMounted, ref } from "vue";
 
 const router = useRouter();
 const store = useStore();
 const { cutFoldOne, user } = storeToRefs(store);
+const orScreen = ref(true)
 
 const cutCollapse = () => {
   store.$patch({
@@ -16,10 +19,28 @@ const cutCollapse = () => {
   });
 };
 
+// f11全屏
+const keyDown = (event) => {
+  if(event.keyCode === 122){
+    event.returnValue = false
+    screen()
+  }
+}
+
+// 切换
 const screen = () => {
-  console.log(12234);
+  if(screenfull.isEnabled === false){
+    layer.msg('当前浏览器不支持全屏')
+    return false
+  }
+  screenfull.toggle()
+  orScreen.value = screenfull.isFullscreen
 };
 
+// 监听
+onMounted(() => {
+  window.addEventListener("keydown", keyDown, true)
+})
 const refresh = () => {
   store.freshen()
 }
@@ -46,7 +67,7 @@ const userinfo = () => {
     <i class="iconfont" :class="cutFoldOne" @click="cutCollapse"></i>
     <div class="head-list-right">
       <i class="iconfont icon-shuaxin" @click="refresh"></i>
-      <i class="iconfont icon-fullscreen-expand" @click="screen"></i>
+      <i class="iconfont" :class="orScreen ? 'icon-fullscreen-expand' : 'icon-tuichuquanping'" @click="screen"></i>
       <el-tooltip placement="bottom" effect="light">
         <template #content>
           <div class="head-list-avatar">
