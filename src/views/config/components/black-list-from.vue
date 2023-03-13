@@ -50,8 +50,8 @@ const clickButton = () => {
             </el-form-item>
             <el-form-item label="类型">
                 <el-radio-group v-model="data.is_type">
-                <el-radio :label="1" border>永久拉黑</el-radio>
-                <el-radio :label="2" border>暂时拉黑</el-radio>
+                <el-radio :label="1" border>永久</el-radio>
+                <el-radio :label="2" border>按日期</el-radio>
                 </el-radio-group>
             </el-form-item>
             <el-form-item label="到期时间" v-if="!data.is_type || data.is_type == 2">

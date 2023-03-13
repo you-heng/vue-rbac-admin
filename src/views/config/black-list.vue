@@ -156,8 +156,8 @@ const handleCurrentChange = (e) => {
                 <el-table-column prop="ip" label="ip地址" align="center" />
                 <el-table-column prop="is_type" label="类型" align="center" width="100">
                     <template #default="scope">
-                        <el-tag type="success" v-if="scope.row.is_type == 1">永久拉黑</el-tag>
-                        <el-tag type="warning" v-else>暂时拉黑</el-tag>
+                        <el-tag type="success" v-if="scope.row.is_type == 1">永久</el-tag>
+                        <el-tag type="warning" v-else>到期时间</el-tag>
                     </template>
                 </el-table-column>
                 <el-table-column prop="reason" label="冻结理由" align="center" />

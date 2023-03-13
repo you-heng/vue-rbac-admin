@@ -12,6 +12,8 @@ const code = [
     401, // 没有权限
     402, // token过期
     403, // token失效
+    404, // 资源不存在
+    405, // ip防火墙
 ]
 
 // 请求前
@@ -37,13 +39,17 @@ http.interceptors.response.use(
         loading(true)
         if(code.indexOf(response.data.code) > -1){
             layer.msg(response.data.msg)
+            setTimeout(() => {
+                clear_storage()
+                location.reload()
+            }, 1500)
         }
         return response.data;
     },
     function (error) {
         if(error.response.status === 500){
-            // clear_storage()
-            // location.reload()
+            clear_storage()
+            location.reload()
         }
         return Promise.reject(error);
     }
