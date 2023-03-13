@@ -34,8 +34,7 @@ const jobStore = defineStore("jobStore", {
             sort: 0
         },
         fields: {
-            job_name: '请填写职位名称',
-            sort: 0
+            job_name: '请填写职位名称'
         },
         dialog: {
             dialogVisible: false,
@@ -181,13 +180,18 @@ const jobStore = defineStore("jobStore", {
             url: 'console/job/batch_down',
             data: {ids: this.ids }
         }).then((res) => {
-            // layer.msg(res.msg)
+            location.href = '/api/console/index/excel'
         })
     },
     // 全部导出
     down_all(){
-        console.log('全部导出')
-        //console/job/down_all
+        http({
+            method: 'post',
+            url: 'console/job/down_all',
+            data: {}
+        }).then((res) => {
+            location.href = '/api/console/index/excel'
+        })
     }
   },
 });

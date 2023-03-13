@@ -52,7 +52,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    // history: createWebHistory('test'),
+    // history: createWebHistory('rbac'),
     history: createWebHistory(),
     routes
 });

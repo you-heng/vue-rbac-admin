@@ -44,8 +44,7 @@ const dictStore = defineStore("dictStore", {
         },
         fields: {
             key: '请填写配置名',
-            val: '请填写配置值',
-            sort: 0
+            val: '请填写配置值'
         },
         dialog: {
             dialogVisible: false,

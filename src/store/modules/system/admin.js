@@ -45,8 +45,7 @@ const adminStore = defineStore("adminStore", {
             username: '请填写用户名',
             role_ids: '请选择至少一个角色',
             team_ids: '请选择用户所属部门',
-            job_id: '请选择一个职位',
-            sort: 0
+            job_id: '请选择一个职位'
         },
         dialog: {
             dialogVisible: false,
