@@ -120,12 +120,12 @@ const handleCurrentChange = (e) => {
             </div>
             <el-table :data="logsList" @selection-change="handleSelectionChange" border style="width: 100%; height: 83%;">
                 <el-table-column type="selection" width="55" />
-                <el-table-column prop="id" label="ID" fixed sortable width="80" align="center" />
+                <el-table-column prop="id" label="ID" fixed sortable width="100" align="center" />
                 <el-table-column prop="username" label="操作用户" align="center" width="150" />
-                <el-table-column prop="path" label="请求地址" align="center" />
-                <el-table-column prop="tag" label="动作类型" align="center" />
-                <el-table-column prop="is_state" label="请求地址" align="center" />
-                <el-table-column prop="ip" label="ip" align="center" />
+                <el-table-column prop="tag" label="动作类型" align="center" width="100" />
+                <el-table-column prop="path" label="请求地址" align="center" width="200" />
+                <el-table-column prop="content" label="操作内容" align="center" width="280" />
+                <el-table-column prop="ip" label="ip" align="center" width="170" />
                 <el-table-column prop="is_state" label="状态" align="center">
                     <template #default="scope">
                         <el-popconfirm title="确定修改?" @confirm="store.state(scope.$index, scope.row)">

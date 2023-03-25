@@ -63,10 +63,10 @@ const dictStore = defineStore("dictStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.dictList = res.data
-            this.pagination.page = res.page,
-            this.pagination.limit = res.limit
-            this.pagination.count = res.count
+            this.dictList = res.data.data
+            this.pagination.page = res.data.current_page
+            this.pagination.limit = res.data.per_page
+            this.pagination.count = res.data.total
         })
     },
     // 新增

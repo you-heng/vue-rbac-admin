@@ -36,23 +36,23 @@ const interfaceLogsStore = defineStore("interfaceLogsStore", {
     get_list(){
         http({
             method: 'get',
-            url: 'console/record/index',
+            url: 'console/InterfaceLogs/index',
             params: {
                 page: this.pagination.page,
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.logsList = res.data
-            this.pagination.page = res.page,
-            this.pagination.limit = res.limit
-            this.pagination.count = res.count
+            this.logsList = res.data.data
+            this.pagination.page = res.data.current_page
+            this.pagination.limit = res.data.per_page
+            this.pagination.count = res.data.total
         })
     },
     // 删除
     remove(index, row, id){
         http({
             method: 'post',
-            url: 'console/record/remove',
+            url: 'console/InterfaceLogs/remove',
             data: {id: row.id}
         }).then((res) => {
             layer.msg(res.msg)
@@ -70,7 +70,7 @@ const interfaceLogsStore = defineStore("interfaceLogsStore", {
         }
         http({
             method: 'post',
-            url: 'console/record/search',
+            url: 'console/InterfaceLogs/search',
             data: {
                 select: this.selectValue,
                 search: this.searchValue
@@ -93,7 +93,7 @@ const interfaceLogsStore = defineStore("interfaceLogsStore", {
         }
         http({
             method: 'post',
-            url: 'console/record/batch_remove',
+            url: 'console/InterfaceLogs/batch_remove',
             data: {ids: this.ids }
         }).then((res) => {
             layer.close(id)
@@ -109,7 +109,7 @@ const interfaceLogsStore = defineStore("interfaceLogsStore", {
     remove_all(){
         http({
             method: 'post',
-            url: 'console/record/remove_all',
+            url: 'console/InterfaceLogs/remove_all',
             data: {}
         }).then((res) => {
             layer.close(id)
@@ -124,12 +124,12 @@ const interfaceLogsStore = defineStore("interfaceLogsStore", {
             return false
         }
         console.log('批量导出')
-        //console/record/batch_down
+        //console/InterfaceLogs/batch_down
     },
     // 全部导出
     down_all(){
         console.log('全部导出')
-        //console/record/down_all
+        //console/InterfaceLogs/down_all
     }
   },
 });

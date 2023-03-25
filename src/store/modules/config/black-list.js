@@ -53,10 +53,10 @@ const blackListStore = defineStore("blackListStore", {
                     limit: this.pagination.limit
                 }
             }).then((res) => {
-                this.blackLists = res.data
-                this.pagination.page = res.page,
-                this.pagination.limit = res.limit
-                this.pagination.count = res.count
+                this.blackLists = res.data.data
+                this.pagination.page = res.data.current_page
+                this.pagination.limit = res.data.per_page
+                this.pagination.count = res.data.total
             })
         },
         // 增加

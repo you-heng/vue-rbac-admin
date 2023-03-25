@@ -53,10 +53,10 @@ const jobStore = defineStore("jobStore", {
                 limit: this.pagination.limit
             }
         }).then((res) => {
-            this.jobList = res.data
-            this.pagination.page = res.page,
-            this.pagination.limit = res.limit
-            this.pagination.count = res.count
+            this.jobList = res.data.data
+            this.pagination.page = res.data.current_page,
+            this.pagination.limit = res.data.per_page
+            this.pagination.count = res.data.total
         })
     },
     // 新增
