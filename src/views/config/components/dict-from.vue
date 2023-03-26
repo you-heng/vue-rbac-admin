@@ -83,12 +83,20 @@ const putImg = (img) => {
                     v-model="data.val"
                     :rows="3"
                     type="textarea"
-                    placeholder="请填写配置值"
+                    placeholder="json类型的值使用+号分割"
                 />
             </el-form-item>
             <el-form-item label="头像" v-else-if="data.is_type == 3">
                 <upload v-if="data.val == null || data.val == undefined" :imgList="[]" :number="1" @putImg="putImg" />
                 <upload v-else :imgList="typeof(data.val) == 'string' ? [] : [data.val]" :number="1" @putImg="putImg" />
+            </el-form-item>
+            <el-form-item label="备注">
+                <el-input
+                    v-model="data.remark"
+                    :rows="3"
+                    type="textarea"
+                    placeholder="请填写备注"
+                />
             </el-form-item>
             <el-form-item label="排序">
                 <el-input-number v-model="data.sort" />

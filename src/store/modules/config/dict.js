@@ -19,11 +19,6 @@ const dictStore = defineStore("dictStore", {
                 label: '配置名'
             },
             {
-                id: 3,
-                value: 'val',
-                label: '配置值'
-            },
-            {
                 id: 4,
                 value: 'remark',
                 label: '备注'
@@ -49,7 +44,8 @@ const dictStore = defineStore("dictStore", {
         dialog: {
             dialogVisible: false,
             title: '添加'
-        }
+        },
+        is_type: 'text'
     };
   },
   actions: {
@@ -60,7 +56,8 @@ const dictStore = defineStore("dictStore", {
             url: 'console/dict/index',
             params: {
                 page: this.pagination.page,
-                limit: this.pagination.limit
+                limit: this.pagination.limit,
+                is_type: this.is_type
             }
         }).then((res) => {
             this.dictList = res.data.data

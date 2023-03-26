@@ -154,7 +154,6 @@ const handleCurrentChange = (e) => {
                 <el-table-column type="selection" width="55" />
                 <el-table-column prop="id" label="ID" fixed sortable width="80" align="center" />
                 <el-table-column prop="key" label="配置名" align="center" />
-                <el-table-column prop="val" label="配置值" align="center" />
                 <el-table-column prop="remark" label="备注" align="center" />
                 <el-table-column prop="is_state" label="状态" align="center" width="80">
                     <template #default="scope">
@@ -178,7 +177,7 @@ const handleCurrentChange = (e) => {
                         </el-button>
                     </template>
                 </el-table-column>
-            </el-table>
+            </el-table> 
             <el-pagination
                 class="from-pagination"
                 v-model:current-page="pagination.page"
@@ -194,3 +193,12 @@ const handleCurrentChange = (e) => {
         <TableForm />
     </div>
 </template>
+
+<style lang="scss" scoped>
+.demo-tabs > .el-tabs__content {
+  padding: 32px;
+  color: #6b778c;
+  font-size: 32px;
+  font-weight: 600;
+}
+</style>
