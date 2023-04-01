@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http, obj_update } from "@/utils"
+import { http, obj_update, download_execl } from "@/utils"
 
 const roleStore = defineStore("roleStore", {
   state: () => {
@@ -178,6 +178,7 @@ const roleStore = defineStore("roleStore", {
             layer.msg('请选择需要删除的项目')
             return false
         }
+        this.ids = ids.filter((item) => item != 1)
         http({
             method: 'post',
             url: 'console/role/batch_remove',
@@ -212,13 +213,27 @@ const roleStore = defineStore("roleStore", {
             layer.msg('请选择需要导出的项目')
             return false
         }
-        console.log('批量导出')
-        // console/role/batch_down
+        http({
+            method: 'post',
+            url: 'console/role/batch_down',
+            data: {ids: this.ids},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '角色列表.xlsx')
+            layer.msg('下载成功')
+        })
     },
     // 全部导出
     down_all(){
-        console.log('全部导出')
-        // console/role/down_all
+        http({
+            method: 'post',
+            url: 'console/role/down_all',
+            data: {},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '角色列表.xlsx')
+            layer.msg('下载成功')
+        })
     }
   },
 });

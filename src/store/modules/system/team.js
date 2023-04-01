@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http } from "@/utils"
+import { http, download_execl } from "@/utils"
 
 const teamStore = defineStore("teamStore", {
   state: () => {
@@ -122,8 +122,15 @@ const teamStore = defineStore("teamStore", {
     },
     // 全部导出
     down_all(){
-        console.log('全部导出')
-        // console/team/down_all
+        http({
+            method: 'post',
+            url: 'console/team/down_all',
+            data: {},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '团队列表.xlsx')
+            layer.msg('下载成功')
+        })
     }
   },
 });

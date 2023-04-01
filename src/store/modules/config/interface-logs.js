@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http } from "@/utils"
+import { http, download_execl } from "@/utils"
 
 const interfaceLogsStore = defineStore("interfaceLogsStore", {
   state: () => {
@@ -123,13 +123,27 @@ const interfaceLogsStore = defineStore("interfaceLogsStore", {
             layer.msg('请选择需要导出的项目')
             return false
         }
-        console.log('批量导出')
-        //console/InterfaceLogs/batch_down
+        http({
+            method: 'post',
+            url: 'console/InterfaceLogs/batch_down',
+            data: {ids: this.ids},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '日志列表.xlsx')
+            layer.msg('下载成功')
+        })
     },
     // 全部导出
     down_all(){
-        console.log('全部导出')
-        //console/InterfaceLogs/down_all
+        http({
+            method: 'post',
+            url: 'console/InterfaceLogs/down_all',
+            data: {},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '日志列表.xlsx')
+            layer.msg('下载成功')
+        })
     }
   },
 });

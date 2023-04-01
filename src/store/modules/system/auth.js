@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http, tree_data } from "@/utils"
+import { http, download_execl } from "@/utils"
 
 const authStore = defineStore("authStore", {
   state: () => {
@@ -111,8 +111,15 @@ const authStore = defineStore("authStore", {
     },
     // 全部导出
     down_all(){
-        console.log('全部导出')
-        // console/auth/down_all
+        http({
+            method: 'post',
+            url: 'console/auth/down_all',
+            data: {},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '权限列表.xlsx')
+            layer.msg('下载成功')
+        })
     }
   },
 });

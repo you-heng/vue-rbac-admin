@@ -2,11 +2,20 @@
 import useStore from "@/store/modules/config/interface-logs"
 import { storeToRefs } from "pinia";
 import { layer } from "@layui/layer-vue";
+import { ref } from "vue";
 
 const store = useStore()
 const { logsList, selectValue, selectList, pagination, searchValue, ids } = storeToRefs(store)
 
 store.get_list()
+
+const visible = ref({
+    create: false,
+    batch_remove: false,
+    batch_down: false,
+    remove_all: false,
+    freshen: false,
+})
 
 // 批量导出
 const batch_down = () => {
@@ -111,11 +120,21 @@ const handleCurrentChange = (e) => {
                     </div>
                 </div>
                 <el-button-group class="ml-5">
-                    <el-button @click="batch_remove" plain type="warning"><i class="iconfont icon-piliangshanchu"></i></el-button>
-                    <el-button @click="batch_down" plain type="success"><i class="iconfont icon-xiazai"></i></el-button>
-                    <el-button @click="remove_all" plain type="danger"><i class="iconfont icon-quanbushanchu"></i></el-button>
-                    <el-button @click="store.down_all" plain type="info"><i class="iconfont icon-daochu"></i></el-button>
-                    <el-button @click="store.freshen" plain><i class="iconfont icon-shuaxin"></i></el-button>
+                    <lay-tooltip :visible="visible.batch_remove" trigger="click" content="批量删除" >
+                        <el-button @mouseenter="visible.batch_remove=true" @mouseleave="visible.batch_remove=false" @click="batch_remove" plain type="warning"><i class="iconfont icon-piliangshanchu"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.batch_down" trigger="click" content="批量下载" >
+                        <el-button @mouseenter="visible.batch_down=true" @mouseleave="visible.batch_down=false" @click="batch_down" plain type="success"><i class="iconfont icon-xiazai"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.remove_all" trigger="click" content="清空" >
+                        <el-button @mouseenter="visible.remove_all=true" @mouseleave="visible.remove_all=false" @click="remove_all" plain type="danger"><i class="iconfont icon-quanbushanchu"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.down_all" trigger="click" content="导出全部" >
+                        <el-button @mouseenter="visible.down_all=true" @mouseleave="visible.down_all=false" @click="store.down_all" plain type="info"><i class="iconfont icon-daochu"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.freshen" trigger="click" content="刷新" >
+                        <el-button @mouseenter="visible.freshen=true" @mouseleave="visible.freshen=false" @click="store.freshen" plain><i class="iconfont icon-shuaxin"></i></el-button>
+                    </lay-tooltip>
                 </el-button-group>
             </div>
             <el-table :data="logsList" @selection-change="handleSelectionChange" border style="width: 100%; height: 83%;">

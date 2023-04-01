@@ -4,12 +4,22 @@ import { layer } from "@layui/layer-vue";
 import { storeToRefs } from "pinia";
 import TableForm from "./components/admin-from.vue";
 import { remove_field } from "@/utils"
+import { ref } from "vue";
 
 const store = useStore()
 const { adminList, teamList, selectValue, selectList, pagination, searchValue, ids, data } = storeToRefs(store)
 
 store.get_list()
 store.get_team_list()
+
+const visible = ref({
+    create: false,
+    batch_remove: false,
+    batch_down: false,
+    remove_all: false,
+    down_all: false,
+    freshen: false,
+})
 
 // 新增
 const create = () => {
@@ -105,7 +115,6 @@ const handleSelectionChange = (e) => {
     e.filter((item) => {
         ids.push(item.id)
     })
-    ids = ids.filter((item) => item != 1)
     store.$patch({
         ids: ids
     })
@@ -161,12 +170,24 @@ const handleCurrentChange = (e) => {
                     </div>
                 </div>
                 <el-button-group class="ml-6">
-                    <el-button @click="create" plain type="primary"><i class="iconfont icon-addNode"></i></el-button>
-                    <el-button @click="batch_remove" plain type="warning"><i class="iconfont icon-piliangshanchu"></i></el-button>
-                    <el-button @click="batch_down" plain type="success"><i class="iconfont icon-xiazai"></i></el-button>
-                    <el-button @click="remove_all" plain type="danger"><i class="iconfont icon-quanbushanchu"></i></el-button>
-                    <el-button @click="store.down_all" plain type="info"><i class="iconfont icon-daochu"></i></el-button>
-                    <el-button @click="store.freshen" plain><i class="iconfont icon-shuaxin"></i></el-button>
+                    <lay-tooltip :visible="visible.create" trigger="click" content="添加" >
+                        <el-button @mouseenter="visible.create=true" @mouseleave="visible.create=false" @click="create" plain type="primary"><i class="iconfont icon-addNode"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.batch_remove" trigger="click" content="批量删除" >
+                        <el-button @mouseenter="visible.batch_remove=true" @mouseleave="visible.batch_remove=false" @click="batch_remove" plain type="warning"><i class="iconfont icon-piliangshanchu"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.batch_down" trigger="click" content="批量下载" >
+                        <el-button @mouseenter="visible.batch_down=true" @mouseleave="visible.batch_down=false" @click="batch_down" plain type="success"><i class="iconfont icon-xiazai"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.remove_all" trigger="click" content="清空" >
+                        <el-button @mouseenter="visible.remove_all=true" @mouseleave="visible.remove_all=false" @click="remove_all" plain type="danger"><i class="iconfont icon-quanbushanchu"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.down_all" trigger="click" content="导出全部" >
+                        <el-button @mouseenter="visible.down_all=true" @mouseleave="visible.down_all=false" @click="store.down_all" plain type="info"><i class="iconfont icon-daochu"></i></el-button>
+                    </lay-tooltip>
+                    <lay-tooltip :visible="visible.freshen" trigger="click" content="刷新" >
+                        <el-button @mouseenter="visible.freshen=true" @mouseleave="visible.freshen=false" @click="store.freshen" plain><i class="iconfont icon-shuaxin"></i></el-button>
+                    </lay-tooltip>
                 </el-button-group>
             </div>
             <el-table :data="adminList" @selection-change="handleSelectionChange" border style="width: 100%; height: 86%;">

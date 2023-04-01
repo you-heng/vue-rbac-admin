@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http, obj_update } from "@/utils"
+import { http, obj_update, download_execl } from "@/utils"
 
 const blackListStore = defineStore("blackListStore", {
     state: () => {
@@ -174,13 +174,27 @@ const blackListStore = defineStore("blackListStore", {
                 layer.msg('请选择需要导出的项目')
                 return false
             }
-            console.log(this.ids)
-            //console/BlackList/batch_down
+            http({
+                method: 'post',
+                url: 'console/BlackList/batch_down',
+                data: {ids: this.ids},
+                responseType: 'blob', // 设置响应数据类型
+            }).then((data) => {
+                download_execl(data, 'IP防火墙列表.xlsx')
+                layer.msg('下载成功')
+            })
         },
         // 全部导出
         down_all(){
-            console.log('全部导出')
-            //console/BlackList/down_all
+            http({
+                method: 'post',
+                url: 'console/BlackList/down_all',
+                data: {},
+                responseType: 'blob', // 设置响应数据类型
+            }).then((data) => {
+                download_execl(data, 'IP防火墙列表.xlsx')
+                layer.msg('下载成功')
+            })
         }
     }
 });

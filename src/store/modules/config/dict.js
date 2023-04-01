@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http, obj_update } from "@/utils"
+import { http, obj_update, download_execl } from "@/utils"
 
 const dictStore = defineStore("dictStore", {
   state: () => {
@@ -185,13 +185,19 @@ const dictStore = defineStore("dictStore", {
             layer.msg('请选择需要导出的项目')
             return false
         }
-        console.log(this.ids)
-        //console/dict/batch_down
-    },
-    // 全部导出
-    down_all(){
-        console.log('全部导出')
-        //console/dict/down_all
+        if(this.is_type == 'image'){
+            layer.msg('图片类型不能被导出')
+            return false
+        }
+        http({
+            method: 'post',
+            url: 'console/dict/batch_down',
+            data: {ids: this.ids, is_type: this.is_type},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '字典列表.xlsx')
+            layer.msg('下载成功')
+        })
     }
   },
 });

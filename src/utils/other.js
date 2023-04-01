@@ -94,6 +94,29 @@ const obj_update = (data, obj, field) => {
     return data;
   };
 
+// 下载
+const download_execl = (data, filename) => {
+    if (!data) { //data为axios返回的文件流
+        layer.msg('下载失败，解析数据为空！', { time: 3000, icon: 3})
+        return false;
+    }
+    // 创建一个新的url，此url指向新建的Blob对象
+    //type这里因为我要下载excel文件，所以设置的是application/vnd.ms-excel;charset=utf-8
+    let url = window.URL.createObjectURL(new Blob([data], {type: "application/vnd.ms-excel;charset=utf-8"}))
+    // 创建a标签，并隐藏a标签
+    let link = document.createElement('a')
+    link.style.display = 'none'
+    // a标签的href属性指定下载链接
+    link.href = url
+    //setAttribute() 方法添加指定的属性，并为其赋指定的值
+    // 后缀格式.csv/.xsls要和需要和后端返回格式相同，这里以.csv为例
+    link.setAttribute('download',   filename)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    layer.msg('下载成功')
+}
+
 export {
     set_title,
     change_favicon,
@@ -102,5 +125,6 @@ export {
     verify,
     tree_data,
     remove_field,
-    obj_update
+    obj_update,
+    download_execl
 }

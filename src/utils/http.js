@@ -48,8 +48,8 @@ http.interceptors.response.use(
     },
     function (error) {
         if(error.response.status === 500){
-            clear_storage()
-            location.reload()
+            // clear_storage()
+            // location.reload()
         }
         return Promise.reject(error);
     }

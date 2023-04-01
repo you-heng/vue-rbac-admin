@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { layer } from "@layui/layer-vue";
-import { http, obj_update } from "@/utils"
+import { http, obj_update, download_execl } from "@/utils"
 
 const jobStore = defineStore("jobStore", {
   state: () => {
@@ -178,9 +178,11 @@ const jobStore = defineStore("jobStore", {
         http({
             method: 'post',
             url: 'console/job/batch_down',
-            data: {ids: this.ids }
-        }).then((res) => {
-            location.href = '/api/console/index/excel'
+            data: {ids: this.ids},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '职位列表.xlsx')
+            layer.msg('下载成功')
         })
     },
     // 全部导出
@@ -188,9 +190,11 @@ const jobStore = defineStore("jobStore", {
         http({
             method: 'post',
             url: 'console/job/down_all',
-            data: {}
-        }).then((res) => {
-            location.href = '/api/console/index/excel'
+            data: {},
+            responseType: 'blob', // 设置响应数据类型
+        }).then((data) => {
+            download_execl(data, '职位列表.xlsx')
+            layer.msg('下载成功')
         })
     }
   },

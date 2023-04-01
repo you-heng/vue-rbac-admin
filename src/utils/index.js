@@ -9,7 +9,8 @@ import {
     verify,
     tree_data,
     remove_field,
-    obj_update
+    obj_update,
+    download_execl
 } from "./other"
 
 export {
@@ -27,5 +28,6 @@ export {
     verify,
     tree_data,
     remove_field,
-    obj_update
+    obj_update,
+    download_execl
 }
