@@ -9,7 +9,7 @@ const http = axios.create({
 });
 
 const code = [
-    401, // 没有权限
+    //401, // 没有权限
     402, // token过期
     403, // token失效
     404, // 资源不存在
@@ -48,8 +48,8 @@ http.interceptors.response.use(
     },
     function (error) {
         if(error.response.status === 500){
-            // clear_storage()
-            // location.reload()
+            clear_storage()
+            location.reload()
         }
         return Promise.reject(error);
     }

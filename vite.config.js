@@ -14,8 +14,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        // target: "http://rbac.anmixiu.com/",
-        target: "http://rbac.com/",
+        target: "http://rbac.anmixiu.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
